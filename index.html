@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREE TON - Cloud Mining</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #f1f1f1;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --danger: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--dark);
+        }
+        
+        .auth-buttons button {
+            margin-left: 10px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            background-color: transparent;
+            color: var(--dark);
+        }
+        
+        .register-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .main {
+            margin-top: 80px;
+        }
+        
+        .dashboard {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, var(--primary), #27ae60);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .balance-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+        
+        .balance-circle span {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .balance-amount {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .balance-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .withdraw-btn {
+            background-color: white;
+            color: var(--primary);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .withdraw-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .mining-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .mining-status {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .mining-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .mining-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .mining-stats {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background-color: var(--secondary);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        
+        .task-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .task-card {
+            background-color: var(--secondary);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .task-info {
+            flex: 1;
+        }
+        
+        .task-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .task-reward {
+            font-size: 12px;
+            color: var(--primary);
+        }
+        
+        .task-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .referral-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .referral-code {
+            background-color: var(--secondary);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .code-value {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .copy-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .referral-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .level-card {
+            background-color: var(--secondary);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
+        }
+        
+        .level-title {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .level-reward {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .withdraw-form .form-group input {
+            margin-bottom: 10px;
+        }
+        
+        .withdraw-note {
+            font-size: 12px;
+            color: #777;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12px;
+            color: #777;
+            margin-top: 40px;
+        }
+        
+        /* Admin Panel Styles */
+        .admin-container {
+            display: none;
+            padding: 20px;
+        }
+        
+        .admin-header {
+            background-color: var(--dark);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .admin-nav {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .admin-nav li {
+            margin-right: 20px;
+        }
+        
+        .admin-nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        .admin-nav a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .admin-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .admin-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .user-table th, .user-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .user-table th {
+            background-color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .user-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        
+        .edit-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .save-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .stat-box-title {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        
+        .stat-box-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .withdraw-requests {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .request-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .request-info {
+            flex: 1;
+        }
+        
+        .request-email {
+            font-weight: 500;
+        }
+        
+        .request-amount {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .request-address {
+            font-size: 12px;
+            color: #777;
+            margin-top: 3px;
+        }
+        
+        .request-actions button {
+            margin-left: 10px;
+        }
+        
+        .approve-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .reject-btn {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .mining-stats, .referral-stats {
+                flex-direction: column;
+            }
+            
+            .stat-card, .level-card {
+                margin: 5px 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main User Interface -->
+    <div class="container" id="userInterface">
+        <header>
+            <div class="header-content">
+                <div class="logo">FREE <span>TON</span></div>
+                <div class="auth-buttons">
+                    <button class="login-btn" id="loginBtn">Login</button>
+                    <button class="register-btn" id="registerBtn">Register</button>
+                </div>
+            </div>
+        </header>
+        
+        <main class="main">
+            <div class="dashboard">
+                <div class="balance-card">
+                    <div class="balance-circle">
+                        <span>T</span>
+                    </div>
+                    <div class="balance-amount" id="userBalance">0.0000</div>
+                    <div class="balance-label">Available Balance</div>
+                    <button class="withdraw-btn" id="withdrawBtn">Withdraw</button>
+                </div>
+                
+                <div class="mining-section">
+                    <div class="mining-status" id="miningStatus">Mining is stopped</div>
+                    <button class="mining-btn" id="miningBtn">Start Mining</button>
+                    
+                    <div class="mining-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="minedAmount">0.00</div>
+                            <div class="stat-label">Mined Today</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalMined">0.00</div>
+                            <div class="stat-label">Total Mined</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalUsers">0</div>
+                            <div class="stat-label">Total Users</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="task-section">
+                <div class="section-title">
+                    <i>📌</i> Free TON Task
+                </div>
+                <div class="task-card">
+                    <div class="task-info">
+                        <div class="task-name">Join Telegram Channel</div>
+                        <div class="task-reward">Reward: 0.005 TON</div>
+                    </div>
+                    <button class="task-btn" id="taskBtn">Start</button>
+                </div>
+            </div>
+            
+            <div class="referral-section">
+                <div class="section-title">
+                    <i>👥</i> Referral Program
+                </div>
+                <div class="referral-code">
+                    <div>Your Referral Code</div>
+                    <div class="code-value" id="referralCode">------</div>
+                    <button class="copy-btn" id="copyBtn">Copy</button>
+                </div>
+                
+                <div class="referral-stats">
+                    <div class="level-card">
+                        <div class="level-title">Level 1</div>
+                        <div class="level-reward">0.01 TON</div>
+                    </div>
+                    <div class="level-card">
+                        <div class="level-title">Level 2</div>
+                        <div class="level-reward">0.005 TON</div>
+                    </div>
+                    <div class="level-card">
+                        <div class="level-title">Level 3</div>
+                        <div class="level-reward">0.001 TON</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            FREE TON Cloud Mining © 2023 - All Rights Reserved
+        </footer>
+    </div>
+    
+    <!-- Admin Panel (Hidden by default) -->
+    <div class="admin-container" id="adminPanel">
+        <div class="admin-header">
+            <div class="logo">FREE TON <span>Admin Panel</span></div>
+            <button class="logout-btn" id="adminLogoutBtn">Logout</button>
+        </div>
+        
+        <div class="admin-nav">
+            <ul>
+                <li><a href="#" class="active" id="usersTab">Users</a></li>
+                <li><a href="#" id="withdrawalsTab">Withdrawals</a></li>
+                <li><a href="#" id="settingsTab">Settings</a></li>
+            </ul>
+        </div>
+        
+        <div class="admin-card">
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-box-title">Total Users</div>
+                    <div class="stat-box-value" id="adminTotalUsers">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-title">Active Miners</div>
+                    <div class="stat-box-value" id="adminActiveMiners">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-box-title">Total Withdrawals</div>
+                    <div class="stat-box-value" id="adminTotalWithdrawals">0</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin-card" id="usersSection">
+            <div class="admin-card-title">Users Management</div>
+            <input type="text" class="search-box" id="userSearch" placeholder="Search by email, address or referral code">
+            
+            <div class="table-responsive">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>TON Address</th>
+                            <th>Balance</th>
+                            <th>Referral Code</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- Users will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="admin-card" id="withdrawalsSection" style="display: none;">
+            <div class="admin-card-title">Withdrawal Requests</div>
+            
+            <div class="withdraw-requests">
+                <div id="withdrawalsList">
+                    <!-- Withdrawals will be populated here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin-card" id="settingsSection" style="display: none;">
+            <div class="admin-card-title">System Settings</div>
+            
+            <div class="form-group">
+                <label>Mining Rate (TON per 24h)</label>
+                <input type="number" id="miningRate" value="0.01" step="0.001">
+            </div>
+            
+            <div class="form-group">
+                <label>Minimum Withdrawal (TON)</label>
+                <input type="number" id="minWithdrawal" value="0.1" step="0.1">
+            </div>
+            
+            <div class="form-group">
+                <label>Task Reward (TON)</label>
+                <input type="number" id="taskReward" value="0.005" step="0.001">
+            </div>
+            
+            <div class="form-group">
+                <label>Task Link</label>
+                <input type="text" id="taskLink" value="https://t.me/FreeTonPlatform2090">
+            </div>
+            
+            <div class="form-group">
+                <label>Referral Rewards</label>
+                <div style="display: flex; margin-top: 5px;">
+                    <input type="number" id="refLevel1" value="0.01" step="0.001" style="flex: 1; margin-right: 5px;">
+                    <input type="number" id="refLevel2" value="0.005" step="0.001" style="flex: 1; margin-right: 5px;">
+                    <input type="number" id="refLevel3" value="0.001" step="0.001" style="flex: 1;">
+                </div>
+            </div>
+            
+            <button class="submit-btn" id="saveSettingsBtn">Save Settings</button>
+        </div>
+    </div>
+    
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-title">Login</div>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" placeholder="Your email">
+            </div>
+            
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Your password">
+            </div>
+            
+            <button class="submit-btn" id="loginSubmitBtn">Login</button>
+        </div>
+    </div>
+    
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-title">Register</div>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="registerEmail" placeholder="Your email">
+            </div>
+            
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="registerPassword" placeholder="Create password">
+            </div>
+            
+            <div class="form-group">
+                <label>TON Wallet Address</label>
+                <input type="text" id="tonAddress" placeholder="Your TON wallet address (48 characters)">
+            </div>
+            
+            <div class="form-group">
+                <label>Referral Code (optional)</label>
+                <input type="text" id="referralInput" placeholder="Referral code if any">
+            </div>
+            
+            <button class="submit-btn" id="registerSubmitBtn">Register</button>
+        </div>
+    </div>
+    
+    <!-- Withdraw Modal -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content withdraw-form">
+            <span class="close-modal">&times;</span>
+            <div class="modal-title">Withdraw TON</div>
+            
+            <div class="form-group">
+                <label>TON Wallet Address</label>
+                <input type="text" id="withdrawAddress" placeholder="Your TON wallet address">
+            </div>
+            
+            <div class="form-group">
+                <label>Amount (Minimum 0.1 TON)</label>
+                <input type="number" id="withdrawAmount" placeholder="Amount to withdraw" min="0.1" step="0.1">
+            </div>
+            
+            <button class="submit-btn" id="withdrawSubmitBtn">Request Withdrawal</button>
+            
+            <div class="withdraw-note">
+                Withdrawal requests are processed within 24 hours
+            </div>
+        </div>
+    </div>
+    
+    <!-- Task Modal -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-title">Complete Task</div>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                Join our Telegram channel to receive 0.005 TON
+            </div>
+            
+            <a href="https://t.me/FreeTonPlatform2090" target="_blank" style="display: block; text-align: center; margin-bottom: 20px; color: var(--primary);">https://t.me/FreeTonPlatform2090</a>
+            
+            <button class="submit-btn" id="checkTaskBtn">Check Completion</button>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD4UbW_Iy4kUWH3V70Q1mWCI4-_KFk6ku4",
+            authDomain: "onlinewark-a0147.firebaseapp.com",
+            databaseURL: "https://onlinewark-a0147-default-rtdb.firebaseio.com",
+            projectId: "onlinewark-a0147",
+            storageBucket: "onlinewark-a0147.appspot.com",
+            messagingSenderId: "92155538620",
+            appId: "1:92155538620:android:5e198a8eea6bf17f61f4b9"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+        
+        // DOM Elements
+        const userInterface = document.getElementById('userInterface');
+        const adminPanel = document.getElementById('adminPanel');
+        
+        // Auth buttons
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('adminLogoutBtn');
+        
+        // Modals
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const withdrawModal = document.getElementById('withdrawModal');
+        const taskModal = document.getElementById('taskModal');
+        
+        // Close buttons
+        const closeButtons = document.querySelectorAll('.close-modal');
+        
+        // Forms
+        const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+        const registerSubmitBtn = document.getElementById('registerSubmitBtn');
+        const withdrawSubmitBtn = document.getElementById('withdrawSubmitBtn');
+        const checkTaskBtn = document.getElementById('checkTaskBtn');
+        
+        // User data elements
+        const userBalance = document.getElementById('userBalance');
+        const miningStatus = document.getElementById('miningStatus');
+        const miningBtn = document.getElementById('miningBtn');
+        const minedAmount = document.getElementById('minedAmount');
+        const totalMined = document.getElementById('totalMined');
+        const totalUsers = document.getElementById('totalUsers');
+        const referralCode = document.getElementById('referralCode');
+        const copyBtn = document.getElementById('copyBtn');
+        const taskBtn = document.getElementById('taskBtn');
+        
+        // Admin elements
+        const usersTab = document.getElementById('usersTab');
+        const withdrawalsTab = document.getElementById('withdrawalsTab');
+        const settingsTab = document.getElementById('settingsTab');
+        const usersSection = document.getElementById('usersSection');
+        const withdrawalsSection = document.getElementById('withdrawalsSection');
+        const settingsSection = document.getElementById('settingsSection');
+        const usersTableBody = document.getElementById('usersTableBody');
+        const withdrawalsList = document.getElementById('withdrawalsList');
+        const userSearch = document.getElementById('userSearch');
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+        
+        // Admin stats
+        const adminTotalUsers = document.getElementById('adminTotalUsers');
+        const adminActiveMiners = document.getElementById('adminActiveMiners');
+        const adminTotalWithdrawals = document.getElementById('adminTotalWithdrawals');
+        
+        // Settings inputs
+        const miningRate = document.getElementById('miningRate');
+        const minWithdrawal = document.getElementById('minWithdrawal');
+        const taskReward = document.getElementById('taskReward');
+        const taskLink = document.getElementById('taskLink');
+        const refLevel1 = document.getElementById('refLevel1');
+        const refLevel2 = document.getElementById('refLevel2');
+        const refLevel3 = document.getElementById('refLevel3');
+        
+        // Global variables
+        let currentUser = null;
+        let miningInterval = null;
+        let lastMiningTime = null;
+        let isAdmin = false;
+        
+        // Initialize the app
+        function initApp() {
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    currentUser = user;
+                    checkAdmin(user.uid);
+                    loadUserData(user.uid);
+                } else {
+                    currentUser = null;
+                    userInterface.style.display = 'block';
+                    adminPanel.style.display = 'none';
+                }
+            });
+            
+            // Load global stats
+            loadGlobalStats();
+        }
+        
+        // Check if user is admin
+        function checkAdmin(uid) {
+            database.ref('admins/' + uid).once('value').then(snapshot => {
+                if (snapshot.exists()) {
+                    isAdmin = true;
+                    userInterface.style.display = 'none';
+                    adminPanel.style.display = 'block';
+                    loadAdminData();
+                } else {
+                    isAdmin = false;
+                    userInterface.style.display = 'block';
+                    adminPanel.style.display = 'none';
+                }
+            });
+        }
+        
+        // Load user data
+        function loadUserData(uid) {
+            database.ref('users/' + uid).on('value', snapshot => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    
+                    // Update UI
+                    userBalance.textContent = userData.balance.toFixed(4);
+                    totalMined.textContent = userData.totalMined.toFixed(2);
+                    referralCode.textContent = userData.referralCode;
+                    
+                    // Check mining status
+                    if (userData.isMining) {
+                        miningStatus.textContent = 'Mining is active';
+                        miningBtn.textContent = 'Stop Mining';
+                        startMining(uid, userData.lastMiningTime);
+                    } else {
+                        miningStatus.textContent = 'Mining is stopped';
+                        miningBtn.textContent = 'Start Mining';
+                        stopMining();
+                    }
+                }
+            });
+            
+            // Load referral data
+            database.ref('referrals/' + uid).once('value').then(snapshot => {
+                if (snapshot.exists()) {
+                    const referralData = snapshot.val();
+                    // You can display referral stats if needed
+                }
+            });
+        }
+        
+        // Load global stats
+        function loadGlobalStats() {
+            database.ref('stats').on('value', snapshot => {
+                if (snapshot.exists()) {
+                    const stats = snapshot.val();
+                    totalUsers.textContent = stats.totalUsers || 0;
+                    
+                    if (isAdmin) {
+                        adminTotalUsers.textContent = stats.totalUsers || 0;
+                        adminActiveMiners.textContent = stats.activeMiners || 0;
+                        adminTotalWithdrawals.textContent = stats.totalWithdrawals || 0;
+                    }
+                }
+            });
+        }
+        
+        // Load admin data
+        function loadAdminData() {
+            // Load users
+            database.ref('users').on('value', snapshot => {
+                usersTableBody.innerHTML = '';
+                
+                if (snapshot.exists()) {
+                    const users = snapshot.val();
+                    
+                    Object.keys(users).forEach(uid => {
+                        const user = users[uid];
+                        const row = document.createElement('tr');
+                        
+                        row.innerHTML = `
+                            <td>${user.email}</td>
+                            <td>${user.tonAddress}</td>
+                            <td><input type="number" value="${user.balance.toFixed(4)}" class="user-balance" data-uid="${uid}"></td>
+                            <td>${user.referralCode}</td>
+                            <td>
+                                <button class="action-btn save-btn" data-uid="${uid}">Save</button>
+                            </td>
+                        `;
+                        
+                        usersTableBody.appendChild(row);
+                    });
+                }
+            });
+            
+            // Load withdrawals
+            database.ref('withdrawals').orderByChild('status').equalTo('pending').on('value', snapshot => {
+                withdrawalsList.innerHTML = '';
+                
+                if (snapshot.exists()) {
+                    const withdrawals = snapshot.val();
+                    
+                    Object.keys(withdrawals).forEach(key => {
+                        const withdrawal = withdrawals[key];
+                        const item = document.createElement('div');
+                        item.className = 'request-item';
+                        
+                        item.innerHTML = `
+                            <div class="request-info">
+                                <div class="request-email">${withdrawal.email}</div>
+                                <div class="request-amount">${withdrawal.amount} TON</div>
+                                <div class="request-address">${withdrawal.address}</div>
+                            </div>
+                            <div class="request-actions">
+                                <button class="action-btn approve-btn" data-id="${key}" data-uid="${withdrawal.uid}">Approve</button>
+                                <button class="action-btn reject-btn" data-id="${key}">Reject</button>
+                            </div>
+                        `;
+                        
+                        withdrawalsList.appendChild(item);
+                    });
+                }
+            });
+            
+            // Load settings
+            database.ref('settings').once('value').then(snapshot => {
+                if (snapshot.exists()) {
+                    const settings = snapshot.val();
+                    miningRate.value = settings.miningRate;
+                    minWithdrawal.value = settings.minWithdrawal;
+                    taskReward.value = settings.taskReward;
+                    taskLink.value = settings.taskLink;
+                    refLevel1.value = settings.refLevel1;
+                    refLevel2.value = settings.refLevel2;
+                    refLevel3.value = settings.refLevel3;
+                }
+            });
+        }
+        
+        // Start mining
+        function startMining(uid, lastTime) {
+            stopMining();
+            
+            const miningRatePerSecond = 0.01 / (24 * 60 * 60); // 0.01 TON per day
+            
+            if (lastTime) {
+                const now = Date.now();
+                const diff = (now - lastTime) / 1000; // in seconds
+                const mined = diff * miningRatePerSecond;
+                
+                if (mined > 0) {
+                    updateBalance(uid, mined);
+                    minedAmount.textContent = mined.toFixed(4);
+                }
+            }
+            
+            lastMiningTime = Date.now();
+            
+            miningInterval = setInterval(() => {
+                const now = Date.now();
+                const diff = (now - lastMiningTime) / 1000;
+                const mined = diff * miningRatePerSecond;
+                
+                if (mined > 0) {
+                    updateBalance(uid, mined);
+                    const currentMined = parseFloat(minedAmount.textContent);
+                    minedAmount.textContent = (currentMined + mined).toFixed(4);
+                    lastMiningTime = now;
+                }
+            }, 10000); // Update every 10 seconds
+            
+            // Update mining status in database
+            database.ref('users/' + uid).update({
+                isMining: true,
+                lastMiningTime: lastMiningTime
+            });
+            
+            // Update active miners count
+            database.ref('stats/activeMiners').transaction(current => (current || 0) + 1);
+        }
+        
+        // Stop mining
+        function stopMining() {
+            if (miningInterval) {
+                clearInterval(miningInterval);
+                miningInterval = null;
+            }
+        }
+        
+        // Update user balance
+        function updateBalance(uid, amount) {
+            database.ref('users/' + uid + '/balance').transaction(current => (current || 0) + amount);
+            database.ref('users/' + uid + '/totalMined').transaction(current => (current || 0) + amount);
+        }
+        
+        // Generate random referral code
+        function generateReferralCode() {
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let result = '';
+            
+            for (let i = 0; i < 6; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            return result;
+        }
+        
+        // Event Listeners
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+        
+        registerBtn.addEventListener('click', () => {
+            registerModal.style.display = 'flex';
+        });
+        
+        withdrawBtn.addEventListener('click', () => {
+            if (!currentUser) {
+                alert('Please login first');
+                return;
+            }
+            
+            database.ref('users/' + currentUser.uid).once('value').then(snapshot => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    document.getElementById('withdrawAddress').value = userData.tonAddress;
+                    withdrawModal.style.display = 'flex';
+                }
+            });
+        });
+        
+        taskBtn.addEventListener('click', () => {
+            if (!currentUser) {
+                alert('Please login first');
+                return;
+            }
+            
+            taskModal.style.display = 'flex';
+        });
+        
+        copyBtn.addEventListener('click', () => {
+            const code = referralCode.textContent;
+            if (code && code !== '------') {
+                navigator.clipboard.writeText(code);
+                alert('Referral code copied!');
+            }
+        });
+        
+        miningBtn.addEventListener('click', () => {
+            if (!currentUser) {
+                alert('Please login first');
+                return;
+            }
+            
+            database.ref('users/' + currentUser.uid).once('value').then(snapshot => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    const newStatus = !userData.isMining;
+                    
+                    database.ref('users/' + currentUser.uid).update({
+                        isMining: newStatus,
+                        lastMiningTime: newStatus ? Date.now() : null
+                    });
+                    
+                    if (newStatus) {
+                        startMining(currentUser.uid, Date.now());
+                    } else {
+                        stopMining();
+                    }
+                }
+            });
+        });
+        
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            });
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+        
+        loginSubmitBtn.addEventListener('click', () => {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    loginModal.style.display = 'none';
+                })
+                .catch(error => {
+                    alert('Login error: ' + error.message);
+                });
+        });
+        
+        registerSubmitBtn.addEventListener('click', () => {
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const tonAddress = document.getElementById('tonAddress').value;
+            const referral = document.getElementById('referralInput').value;
+            
+            if (!email || !password || !tonAddress) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            if (tonAddress.length !== 48) {
+                alert('TON address must be 48 characters long');
+                return;
+            }
+            
+            // Create user
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    const user = userCredential.user;
+                    const referralCode = generateReferralCode();
+                    
+                    // Save user data
+                    const userData = {
+                        email: email,
+                        tonAddress: tonAddress,
+                        balance: 0,
+                        totalMined: 0,
+                        isMining: false,
+                        lastMiningTime: null,
+                        referralCode: referralCode,
+                        createdAt: Date.now()
+                    };
+                    
+                    database.ref('users/' + user.uid).set(userData);
+                    
+                    // Update stats
+                    database.ref('stats/totalUsers').transaction(current => (current || 0) + 1);
+                    
+                    // Process referral if exists
+                    if (referral) {
+                        processReferral(referral, user.uid);
+                    }
+                    
+                    registerModal.style.display = 'none';
+                })
+                .catch(error => {
+                    alert('Registration error: ' + error.message);
+                });
+        });
+        
+        // Process referral
+        function processReferral(referralCode, newUserId) {
+            // Find user with this referral code
+            database.ref('users').orderByChild('referralCode').equalTo(referralCode).once('value')
+                .then(snapshot => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        const referrerId = Object.keys(data)[0];
+                        const referrerData = data[referrerId];
+                        
+                        // Add referral to referrer's list
+                        const referralData = {
+                            userId: newUserId,
+                            level: 1,
+                            timestamp: Date.now()
+                        };
+                        
+                        database.ref('referrals/' + referrerId).push(referralData);
+                        
+                        // Add reward to referrer (Level 1)
+                        database.ref('users/' + referrerId + '/balance').transaction(current => (current || 0) + 0.01);
+                        
+                        // Check if referrer has a referrer (Level 2)
+                        if (referrerData.referredBy) {
+                            database.ref('users/' + referrerData.referredBy + '/balance').transaction(current => (current || 0) + 0.005);
+                            
+                            // Check if level 2 referrer has a referrer (Level 3)
+                            database.ref('users/' + referrerData.referredBy).once('value')
+                                .then(snapshot => {
+                                    const level2User = snapshot.val();
+                                    if (level2User.referredBy) {
+                                        database.ref('users/' + level2User.referredBy + '/balance').transaction(current => (current || 0) + 0.001);
+                                    }
+                                });
+                        }
+                        
+                        // Mark new user as referred
+                        database.ref('users/' + newUserId).update({
+                            referredBy: referrerId
+                        });
+                    }
+                });
+        }
+        
+        withdrawSubmitBtn.addEventListener('click', () => {
+            const address = document.getElementById('withdrawAddress').value;
+            const amount = parseFloat(document.getElementById('withdrawAmount').value);
+            
+            if (!address || !amount) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            if (address.length !== 48) {
+                alert('TON address must be 48 characters long');
+                return;
+            }
+            
+            database.ref('users/' + currentUser.uid).once('value').then(snapshot => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    
+                    if (amount < 0.1) {
+                        alert('Minimum withdrawal is 0.1 TON');
+                        return;
+                    }
+                    
+                    if (amount > userData.balance) {
+                        alert('Insufficient balance');
+                        return;
+                    }
+                    
+                    // Create withdrawal request
+                    const withdrawalData = {
+                        uid: currentUser.uid,
+                        email: userData.email,
+                        address: address,
+                        amount: amount,
+                        status: 'pending',
+                        timestamp: Date.now()
+                    };
+                    
+                    database.ref('withdrawals').push(withdrawalData);
+                    
+                    // Deduct from balance
+                    database.ref('users/' + currentUser.uid + '/balance').transaction(current => current - amount);
+                    
+                    withdrawModal.style.display = 'none';
+                    alert('Withdrawal request submitted. It will be processed within 24 hours.');
+                }
+            });
+        });
+        
+        checkTaskBtn.addEventListener('click', () => {
+            // In a real app, you would verify Telegram join status
+            // For demo, we'll just reward the user
+            
+            database.ref('users/' + currentUser.uid).once('value').then(snapshot => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    
+                    if (userData.taskCompleted) {
+                        alert('You have already completed this task');
+                        taskModal.style.display = 'none';
+                        return;
+                    }
+                    
+                    // Add reward
+                    database.ref('users/' + currentUser.uid).update({
+                        balance: userData.balance + 0.005,
+                        taskCompleted: true
+                    });
+                    
+                    taskModal.style.display = 'none';
+                    alert('Task completed! 0.005 TON has been added to your balance.');
+                }
+            });
+        });
+        
+        // Admin event listeners
+        usersTab.addEventListener('click', (e) => {
+            e.preventDefault();
+            usersSection.style.display = 'block';
+            withdrawalsSection.style.display = 'none';
+            settingsSection.style.display = 'none';
+            
+            usersTab.classList.add('active');
+            withdrawalsTab.classList.remove('active');
+            settingsTab.classList.remove('active');
+        });
+        
+        withdrawalsTab.addEventListener('click', (e) => {
+            e.preventDefault();
+            usersSection.style.display = 'none';
+            withdrawalsSection.style.display = 'block';
+            settingsSection.style.display = 'none';
+            
+            usersTab.classList.remove('active');
+            withdrawalsTab.classList.add('active');
+            settingsTab.classList.remove('active');
+        });
+        
+        settingsTab.addEventListener('click', (e) => {
+            e.preventDefault();
+            usersSection.style.display = 'none';
+            withdrawalsSection.style.display = 'none';
+            settingsSection.style.display = 'block';
+            
+            usersTab.classList.remove('active');
+            withdrawalsTab.classList.remove('active');
+            settingsTab.classList.add('active');
+        });
+        
+        logoutBtn.addEventListener('click', () => {
+            auth.signOut();
+        });
+        
+        // Save user balance (admin)
+        usersTableBody.addEventListener('click', (e) => {
+            if (e.target.classList.contains('save-btn')) {
+                const uid = e.target.getAttribute('data-uid');
+                const balanceInput = document.querySelector(`.user-balance[data-uid="${uid}"]`);
+                const newBalance = parseFloat(balanceInput.value);
+                
+                if (!isNaN(newBalance)) {
+                    database.ref('users/' + uid).update({
+                        balance: newBalance
+                    });
+                    
+                    alert('Balance updated successfully');
+                } else {
+                    alert('Please enter a valid number');
+                }
+            }
+        });
+        
+        // Process withdrawals (admin)
+        withdrawalsList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('approve-btn')) {
+                const id = e.target.getAttribute('data-id');
+                const uid = e.target.getAttribute('data-uid');
+                
+                // In a real app, you would send TON here
+                // For demo, we'll just mark as completed
+                database.ref('withdrawals/' + id).update({
+                    status: 'completed',
+                    processedAt: Date.now()
+                });
+                
+                // Update stats
+                database.ref('stats/totalWithdrawals').transaction(current => (current || 0) + 1);
+                
+                alert('Withdrawal approved');
+            }
+            
+            if (e.target.classList.contains('reject-btn')) {
+                const id = e.target.getAttribute('data-id');
+                
+                database.ref('withdrawals/' + id).update({
+                    status: 'rejected',
+                    processedAt: Date.now()
+                });
+                
+                alert('Withdrawal rejected');
+            }
+        });
+        
+        // Save settings (admin)
+        saveSettingsBtn.addEventListener('click', () => {
+            const settings = {
+                miningRate: parseFloat(miningRate.value),
+                minWithdrawal: parseFloat(minWithdrawal.value),
+                taskReward: parseFloat(taskReward.value),
+                taskLink: taskLink.value,
+                refLevel1: parseFloat(refLevel1.value),
+                refLevel2: parseFloat(refLevel2.value),
+                refLevel3: parseFloat(refLevel3.value)
+            };
+            
+            database.ref('settings').set(settings);
+            alert('Settings saved successfully');
+        });
+        
+        // Search users (admin)
+        userSearch.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            
+            if (query.length < 2) return;
+            
+            database.ref('users').once('value').then(snapshot => {
+                usersTableBody.innerHTML = '';
+                
+                if (snapshot.exists()) {
+                    const users = snapshot.val();
+                    
+                    Object.keys(users).forEach(uid => {
+                        const user = users[uid];
+                        
+                        if (user.email.toLowerCase().includes(query) || 
+                            user.tonAddress.toLowerCase().includes(query) || 
+                            user.referralCode.toLowerCase().includes(query)) {
+                            
+                            const row = document.createElement('tr');
+                            
+                            row.innerHTML = `
+                                <td>${user.email}</td>
+                                <td>${user.tonAddress}</td>
+                                <td><input type="number" value="${user.balance.toFixed(4)}" class="user-balance" data-uid="${uid}"></td>
+                                <td>${user.referralCode}</td>
+                                <td>
+                                    <button class="action-btn save-btn" data-uid="${uid}">Save</button>
+                                </td>
+                            `;
+                            
+                            usersTableBody.appendChild(row);
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Initialize the app
+        initApp();
+    </script>
+</body>
+</html> 
